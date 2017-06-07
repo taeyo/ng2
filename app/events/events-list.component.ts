@@ -4,6 +4,8 @@ import { ToastrService} from '../common/toastr.service'
 // for using resolver
 import { ActivatedRoute } from '@angular/router'
 
+import { IEvent } from './shared/index'
+
 @Component({
 
     template : `
@@ -19,7 +21,7 @@ import { ActivatedRoute } from '@angular/router'
 }) //    selector : 'events-list',
 
 export class EventsListComponent implements OnInit {
-    events: any;
+    events: IEvent[];
 
     //inject Event-Service
     constructor(private eventSvc : EventService, 
