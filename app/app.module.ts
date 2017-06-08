@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import {
     EventsListComponent,
@@ -22,6 +23,8 @@ import { AuthService } from './user/auth.service'
 @NgModule({
     imports : [
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(appRoutes)
     ],
     declarations : [ 
@@ -53,7 +56,7 @@ export class AppModule {
 
 function checkDirtyState(componet:EventCreateComponent){
     if(componet.isDirty)
-        return window.confirm('저장되지 않은 내용이 있습니다. 정말로 취소하실 겁니까?')
+        return window.confirm('저장되지 않은 내용이 있습니다. 계속하시겠습니까?')
     return true
 
 }
