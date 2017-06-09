@@ -23,5 +23,10 @@
   </div>
 
   <hr />
-  <session-list [sessions]="event?.sessions"></session-list>
+  <h3>세션 목록</h3>
+  <a (click)="this.addSession=true">세션 추가</a>
+  <session-list *ngIf="!this.addSession" [sessions]="event?.sessions"></session-list>
+  <create-session *ngIf="this.addSession" 
+      (saveNewSession)="saveNewSession($event)"
+      (cancelNewSession)="cancelAddSession()"></create-session>
 </div>
