@@ -23,9 +23,24 @@
   </div>
 
   <hr />
-  <h3>세션 목록</h3>
-  <a (click)="this.addSession=true">세션 추가</a>
-  <session-list *ngIf="!this.addSession" [sessions]="event?.sessions"></session-list>
+  <div class="row">
+    <div class="col-md-2">
+      <h3>세션 목록</h3>
+    </div>
+    <div class="col-md-8">
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" [class.active]="filterBy==='all'" (click)="filterBy='all'">All</button>
+        <button class="btn btn-default" [class.active]="filterBy==='beginner'" (click)="filterBy='beginner'">Beginner</button>
+        <button class="btn btn-default" [class.active]="filterBy==='intermediate'" (click)="filterBy='intermediate'">Intermediate</button>
+        <button class="btn btn-default" [class.active]="filterBy==='advanced'" (click)="filterBy='advanced'">Advanced</button>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <a (click)="this.addSession=true">세션 추가</a>
+    </div>
+  </div>
+  <session-list *ngIf="!this.addSession" [filterBy]="filterBy" [sessions]="event?.sessions"></session-list>
+
   <create-session *ngIf="this.addSession" 
       (saveNewSession)="saveNewSession($event)"
       (cancelNewSession)="cancelAddSession()"></create-session>

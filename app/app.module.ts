@@ -12,15 +12,19 @@ import {
     EventRouteActivator,
     EventsListResolver,
     CreateSessionComponent,
-    SessionListComponent
+    SessionListComponent,
+    DurationPipe
 } from './events/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
-import { ToastrService} from './common/toastr.service'
+import { TOASTR_TOKEN, IToastr} from './common/toastr.service'
 import { Error404Component } from './errors/404.component'
 import { appRoutes } from './routes'
 
 import { AuthService } from './user/auth.service'
+import { CollapsibleWellComponent } from './common/collapsible-well.component'
+
+declare let toastr : IToastr
 
 @NgModule({
     imports : [
@@ -38,11 +42,17 @@ import { AuthService } from './user/auth.service'
         EventCreateComponent,
         Error404Component,
         CreateSessionComponent,
-        SessionListComponent
+        SessionListComponent,
+        CollapsibleWellComponent,
+        DurationPipe
     ],
     providers : [
         EventService,
-        ToastrService,
+        //ToastrService,
+        {
+            provide:TOASTR_TOKEN,
+            useValue : toastr
+        },
         EventRouteActivator,
         EventsListResolver,
         {

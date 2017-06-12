@@ -16,6 +16,7 @@ import { IEvent, ISession } from '../shared/index'
 export class EventDetailsComponent implements OnInit{
     event: IEvent
     addSession: Boolean = false;
+    filterBy: string = 'all'
 
     constructor(private eventSvc: EventService, 
                 private router: ActivatedRoute){

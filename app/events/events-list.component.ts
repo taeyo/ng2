@@ -14,18 +14,19 @@ import { IEvent } from './shared/index'
         <hr />
         <div class="col-md-5" *ngFor="let eventItem of events">
             <events-thumbnail
-                [event]="eventItem" (click)='handleClick(eventItem.name)' #thumbnail></events-thumbnail>
+                [event]="eventItem" #thumbnail></events-thumbnail>
         </div>
     </div>
     `
 }) //    selector : 'events-list',
+// (click)='handleClick(eventItem.name)' 
 
 export class EventsListComponent implements OnInit {
     events: IEvent[];
 
     //inject Event-Service
     constructor(private eventSvc : EventService, 
-                private toastrSvc: ToastrService,
+                // private toastrSvc: ToastrService,
                 private route: ActivatedRoute){
         
     }
@@ -39,7 +40,7 @@ export class EventsListComponent implements OnInit {
     }
 
     handleClick(name : string) : void {
-        this.toastrSvc.success(name);
+        // this.toastrSvc.success(name);
     }
 
     // event1 = {
