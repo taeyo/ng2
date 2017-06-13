@@ -17,6 +17,11 @@ export interface IToastr{
 
 // @Injectable()
 // export class ToastrService {
+
+//     constructor(){
+//         toastr.options.progressBar = true;
+//     }
+
 //     success(message: string, title?: string){
 //         toastr.success(message, title);
 //     }
