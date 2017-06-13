@@ -7,6 +7,8 @@ export interface IToastr{
     info(msg: string, title?: string) : void;
     warning(msg: string, title?: string) : void;
     error(msg: string, title?: string) : void;
+
+    //options :{ "progressBar": true };
 }
 
 // import { Injectable } from '@angular/core'
