@@ -8,6 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
             <ng-content *ngIf="visible"></ng-content>
         </div>
     `
+
+    // <h4>
+    //  <ng-content select="well-title"></ng-content>
+    // </h4>
+    //  <ng-content select="well-body" *ngIf="visible"></ng-content>
 })
 
 export class CollapsibleWellComponent implements OnInit {
