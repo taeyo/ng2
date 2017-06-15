@@ -19,17 +19,30 @@ export class EventDetailsComponent implements OnInit{
     filterBy: string = 'all'
 
     constructor(private eventSvc: EventService, 
-                private router: ActivatedRoute){
+                private route: ActivatedRoute){
     }
 
     ngOnInit() {
+        //Resolver를 적용하면 직접 서버 호출하지 않고 리졸버에게서 받아올 수 있음.
+        // this.route.params.forEach( (params: Params) => {
+        //     this.event = this.route.snapshot.data['event'];
+        //     this.addSession = false;
+        // });
+        this.route.data.forEach((data) => {
+            this.event = data['event'];
+            this.addSession = false;
+        });
 
-    //이렇게 해야 observable 됨. 즉, id 매개변수 값이 바뀔때마다 동작함.
-       this.router.params.forEach( (params: Params) => {
-           console.log(params);
-           this.event = this.eventSvc.getEvent(+params['id']);
-       })
-       //이건 스냅샷이라서 observable 안됨
+        // //이렇게 해야 observable 됨. 즉, id 매개변수 값이 바뀔때마다 동작함.
+        // this.router.params.forEach( (params: Params) => {
+ 
+        //    this.eventSvc.getEvent(+params['id']).subscribe((event: IEvent) => {
+        //         this.event = event;
+        //         this.addSession = false;
+        //    });
+        // //    this.event = this.eventSvc.getEvent(+params['id']);
+        //    })
+        //이건 스냅샷이라서 observable 안됨
         // this.event = this.eventSvc.getEvent(
         //     +this.router.snapshot.params['id']);
     }

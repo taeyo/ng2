@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { EventService } from './shared/event.service'
-import { ToastrService} from '../common/toastr.service'
+// import { ToastrService } from '../common/toastr.service'
 // for using resolver
 import { ActivatedRoute } from '@angular/router'
 
@@ -36,7 +36,7 @@ export class EventsListComponent implements OnInit {
         // this.eventSvc.getEvents().subscribe((event) => {
         //     this.events = event;        
         // });
-        this.events = this.route.snapshot.data['events'];
+        this.events = this.route.snapshot.data['events'];  // 리졸버에 적용한 키값
     }
 
     handleClick(name : string) : void {
