@@ -45,10 +45,19 @@ export class ProfileComponent implements OnInit{
     
     saveProfile(formValues){
         if(this.profileForm.valid){
-            this.authSvc.updateCurrentUser(formValues.firstName, formValues.lastName);
-            this.toastr.success('Profile Saved');
-            this.router.navigate(['events']);
+            this.authSvc.updateCurrentUser(formValues.firstName, formValues.lastName)
+                .subscribe(() =>{
+                    this.toastr.success('Profile Saved');        
+                });;
+            
+            //this.router.navigate(['events']);
         }
+    }
+
+    logout(){
+        this.authSvc.logout().subscribe(() => {
+            this.router.navigate(['/user/login']);
+        });
     }
 
     cancel(){

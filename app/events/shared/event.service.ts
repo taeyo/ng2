@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core'
 import { Subject, Observable} from 'rxjs/RX'
 import { IEvent, ISession } from './index'
-import { Http, Response } from '@angular/http'
+import { Http, Response, Headers, RequestOptions } from '@angular/http'
 
 @Injectable()
 export class EventService
@@ -40,9 +40,23 @@ export class EventService
     }
 
     saveEvent(event: IEvent){
-      event.id = 999;
-      event.sessions = [];
-      EVENTS.push(event);
+      // event.id = 999;
+      // event.sessions = [];
+      // EVENTS.push(event);
+      let header = new Headers({
+        'Content-Type' : 'application/json'
+      });
+      let options = new RequestOptions({
+        headers : header
+      });
+
+      return this.http
+            .post('/api/events', JSON.stringify(event), options)
+            .map((response: Response) =>{
+              return response.json();
+            })
+            .catch(this.handleError)
+
     }
 
     updateEvent(event){
@@ -52,26 +66,31 @@ export class EventService
 
     searchSession(searchTerm: string) {
       var term = searchTerm.toLocaleLowerCase();
-      var results: ISession[] = [];
+      // var results: ISession[] = [];
 
-      EVENTS.forEach(event => {
-        var matchings = event.sessions.filter(session => {
-          // console.log(session.name + ":" + session.name.toLocaleLowerCase().indexOf(term));
-          return session.name.toLocaleLowerCase().indexOf(term) > -1;
-        })
+      // EVENTS.forEach(event => {
+      //   var matchings = event.sessions.filter(session => {
+      //     // console.log(session.name + ":" + session.name.toLocaleLowerCase().indexOf(term));
+      //     return session.name.toLocaleLowerCase().indexOf(term) > -1;
+      //   })
         
-        matchings = matchings.map((session: any) => {
-          session.eventId = event.id;
-          return session;
-        })
-        results = results.concat(matchings);
-      })
+      //   matchings = matchings.map((session: any) => {
+      //     session.eventId = event.id;
+      //     return session;
+      //   })
+      //   results = results.concat(matchings);
+      // })
 
-      var emitter = new EventEmitter(true);
-      setTimeout(() => {
-        emitter.emit(results)
-      }, 100);
-      return emitter;
+      // var emitter = new EventEmitter(true);
+      // setTimeout(() => {
+      //   emitter.emit(results)
+      // }, 100);
+      // return emitter;
+      return this.http.get('/api/sessions/search?search=' + term)
+          .map((response:Response) => {
+            return response.json()
+          })
+          .catch(this.handleError);
     }
 }
 
